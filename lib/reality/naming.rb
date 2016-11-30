@@ -31,8 +31,8 @@ module Reality
         pascal_case(word) == word
       end
 
-      def pascal_case(input_word)
-        word_parts = split_into_words(input_word).collect { |part| part[0...1].upcase + part[1..-1] }
+      def pascal_case(word)
+        word_parts = split_into_words(word).collect { |part| part[0...1].upcase + part[1..-1] }
         return word_parts[0] if (word_parts.size == 1 && word_parts[0] == word_parts[0].upcase)
         word_parts.join('')
       end
@@ -49,24 +49,24 @@ module Reality
         xmlize(word) == word
       end
 
-      def xmlize(camel_cased_word)
-        underscore(camel_cased_word).tr('_', '-')
+      def xmlize(word)
+        underscore(word).tr('_', '-')
       end
 
       def jsonize?(word)
         jsonize(word) == word
       end
 
-      def jsonize(camel_cased_word)
-        camelize(camel_cased_word)
+      def jsonize(word)
+        camelize(word)
       end
 
       def uppercase_constantize?(word)
         uppercase_constantize(word) == word
       end
 
-      def uppercase_constantize(camel_cased_word)
-        underscore(camel_cased_word).upcase
+      def uppercase_constantize(word)
+        underscore(word).upcase
       end
 
       def pluralize(string)
