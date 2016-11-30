@@ -6,7 +6,7 @@ require 'rubygems/package_task'
 require 'rake/testtask'
 
 desc 'Default Task'
-task :default => :test
+task :default => [:test, :build]
 
 desc 'Test Task'
 Rake::TestTask.new do |t|
