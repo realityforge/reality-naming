@@ -24,8 +24,7 @@ module Reality
         word_parts = split_into_words(input_word).collect { |part| part[0...1].upcase + part[1..-1] }
         return word_parts[0].downcase if (word_parts.size == 1 && word_parts[0] == word_parts[0].upcase)
         word = word_parts.join('')
-        word = word[0...1].downcase + word[1..-1]
-        word
+        word[0...1].downcase + word[1..-1]
       end
 
       def pascal_case?(word)
@@ -35,8 +34,7 @@ module Reality
       def pascal_case(input_word)
         word_parts = split_into_words(input_word).collect { |part| part[0...1].upcase + part[1..-1] }
         return word_parts[0] if (word_parts.size == 1 && word_parts[0] == word_parts[0].upcase)
-        word = word_parts.join('')
-        word
+        word_parts.join('')
       end
 
       def underscore?(word)
