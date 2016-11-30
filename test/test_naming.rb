@@ -27,6 +27,50 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal 'cats', Reality::Naming.pluralize('cat')
   end
 
+  def test_basics
+    assert_equal Reality::Naming.camelize('thisIsCamelCased'), 'thisIsCamelCased'
+    assert_equal Reality::Naming.camelize('ThisIsCamelCased'), 'thisIsCamelCased'
+    assert_equal Reality::Naming.camelize('this_Is_Camel_Cased'), 'thisIsCamelCased'
+    assert_equal Reality::Naming.camelize('this_Is_camel_cased'), 'thisIsCamelCased'
+    assert_equal Reality::Naming.camelize('EJB'), 'ejb'
+    assert_equal Reality::Naming.camelize('EJBContainer'), 'ejbContainer'
+
+    assert_equal Reality::Naming.pascal_case('thisIsCamelCased'), 'ThisIsCamelCased'
+    assert_equal Reality::Naming.pascal_case('ThisIsCamelCased'), 'ThisIsCamelCased'
+    assert_equal Reality::Naming.pascal_case('this_Is_Camel_Cased'), 'ThisIsCamelCased'
+    assert_equal Reality::Naming.pascal_case('this_Is_camel_cased'), 'ThisIsCamelCased'
+    assert_equal Reality::Naming.pascal_case('EJB'), 'Ejb'
+    assert_equal Reality::Naming.pascal_case('EJBContainer'), 'EjbContainer'
+
+    assert_equal Reality::Naming.underscore('thisIsCamelCased'), 'this_is_camel_cased'
+    assert_equal Reality::Naming.underscore('ThisIsCamelCased'), 'this_is_camel_cased'
+    assert_equal Reality::Naming.underscore('this_Is_Camel_Cased'), 'this_is_camel_cased'
+    assert_equal Reality::Naming.underscore('this_Is_camel_cased'), 'this_is_camel_cased'
+    assert_equal Reality::Naming.underscore('EJB'), 'ejb'
+    assert_equal Reality::Naming.underscore('EJBContainer'), 'ejb_container'
+
+    assert_equal Reality::Naming.uppercase_constantize('thisIsCamelCased'), 'THIS_IS_CAMEL_CASED'
+    assert_equal Reality::Naming.uppercase_constantize('ThisIsCamelCased'), 'THIS_IS_CAMEL_CASED'
+    assert_equal Reality::Naming.uppercase_constantize('this_Is_Camel_Cased'), 'THIS_IS_CAMEL_CASED'
+    assert_equal Reality::Naming.uppercase_constantize('this_Is_camel_cased'), 'THIS_IS_CAMEL_CASED'
+    assert_equal Reality::Naming.uppercase_constantize('EJB'), 'EJB'
+    assert_equal Reality::Naming.uppercase_constantize('EJBContainer'), 'EJB_CONTAINER'
+
+    assert_equal Reality::Naming.xmlize('thisIsCamelCased'), 'this-is-camel-cased'
+    assert_equal Reality::Naming.xmlize('ThisIsCamelCased'), 'this-is-camel-cased'
+    assert_equal Reality::Naming.xmlize('this_Is_Camel_Cased'), 'this-is-camel-cased'
+    assert_equal Reality::Naming.xmlize('this_Is_camel_cased'), 'this-is-camel-cased'
+    assert_equal Reality::Naming.xmlize('EJB'), 'ejb'
+    assert_equal Reality::Naming.xmlize('EJBContainer'), 'ejb-container'
+
+    assert_equal Reality::Naming.jsonize('thisIsCamelCased'), 'thisIsCamelCased'
+    assert_equal Reality::Naming.jsonize('ThisIsCamelCased'), 'thisIsCamelCased'
+    assert_equal Reality::Naming.jsonize('this_Is_Camel_Cased'), 'thisIsCamelCased'
+    assert_equal Reality::Naming.jsonize('this_Is_camel_cased'), 'thisIsCamelCased'
+    assert_equal Reality::Naming.jsonize('EJB'), 'ejb'
+    assert_equal Reality::Naming.jsonize('EJBContainer'), 'ejbContainer'
+  end
+
   def test_split_into_words
     assert_equal %w(my Support Library), Reality::Naming.split_into_words('mySupportLibrary')
     assert_equal %w(My Support Library), Reality::Naming.split_into_words('MySupportLibrary')
