@@ -42,9 +42,7 @@ module Reality
       end
 
       def underscore(input_word)
-        word = split_into_words(input_word).join('_')
-        word.downcase!
-        word
+        split_into_words(input_word).join('_').downcase
       end
 
       def xmlize?(word)
