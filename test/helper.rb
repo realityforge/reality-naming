@@ -6,4 +6,8 @@ require 'reality/naming'
 
 class Reality::Naming::TestCase < Minitest::Test
   include Test::Unit::Assertions
+
+  def setup
+    Reality::Naming.clear_pluralization_rules
+  end
 end

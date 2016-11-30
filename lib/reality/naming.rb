@@ -76,21 +76,39 @@ module Reality
         last_2ch = last(singular, 2)
 
         plural = nil
-        if last_ch == 'y'
-          plural = "#{singular[0, length - 1]}ies" unless singular =~ /[aeiou]y$/
-        elsif last_ch == 'f'
-          plural = "#{singular[0, length - 1]}ves" unless singular =~ /[aeiou][aeiou]f$/
-        elsif last_2ch == 'fe'
-          plural = "#{singular[0, length - 2]}ves"
-        elsif %w(ch sh).include?(last_2ch)
-          plural = "#{singular[0, length - 2]}es"
-        elsif %w(s x z).include?(last_ch)
-          plural = "#{singular[0, length - 1]}es"
+        pluralization_rules.each do |rule|
+          plural = rule.call(singular)
+          break unless plural.nil?
+        end
+        if plural.nil?
+          if last_ch == 'y'
+            plural = "#{singular[0, length - 1]}ies" unless singular =~ /[aeiou]y$/
+          elsif last_ch == 'f'
+            plural = "#{singular[0, length - 1]}ves" unless singular =~ /[aeiou][aeiou]f$/
+          elsif last_2ch == 'fe'
+            plural = "#{singular[0, length - 2]}ves"
+          elsif %w(ch sh).include?(last_2ch)
+            plural = "#{singular[0, length - 2]}es"
+          elsif %w(s x z).include?(last_ch)
+            plural = "#{singular[0, length - 1]}es"
+          end
         end
         plural || "#{singular}s"
       end
 
+      def add_pluralization_rule(&block)
+        pluralization_rules << block
+      end
+
+      def clear_pluralization_rules
+        pluralization_rules.clear
+      end
+
       private
+
+      def pluralization_rules
+        @pluralization_rules ||= []
+      end
 
       def split_into_words(camel_cased_word)
         word = camel_cased_word.to_s.dup

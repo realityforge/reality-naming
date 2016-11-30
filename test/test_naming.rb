@@ -9,6 +9,24 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal 'foos', Reality::Naming.pluralize('foo')
   end
 
+  def test_custom_pluralization_rules
+    assert_equal 'heros', Reality::Naming.pluralize('hero')
+    assert_equal 'cats', Reality::Naming.pluralize('cat')
+    Reality::Naming.add_pluralization_rule do |string|
+      string == 'hero' ? 'heroes' : nil
+    end
+    assert_equal 'heroes', Reality::Naming.pluralize('hero')
+    assert_equal 'cats', Reality::Naming.pluralize('cat')
+    Reality::Naming.add_pluralization_rule do |string|
+      string == 'cat' ? 'catz' : nil
+    end
+    assert_equal 'heroes', Reality::Naming.pluralize('hero')
+    assert_equal 'catz', Reality::Naming.pluralize('cat')
+    Reality::Naming.clear_pluralization_rules
+    assert_equal 'heros', Reality::Naming.pluralize('hero')
+    assert_equal 'cats', Reality::Naming.pluralize('cat')
+  end
+
   def test_conversions
     perform_check(:camelize, 'mySupportLibrary')
     perform_check(:pascal_case, 'MySupportLibrary')
