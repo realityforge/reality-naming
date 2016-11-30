@@ -1,7 +1,7 @@
 # reality-naming
 
-`reality-naming` is a simple library that abstracts the conversion of names between
-different naming conventions. Conventions supported include:
+`reality-naming` is a simple library to convert names between different naming conventions.
+Conventions supported include:
 
 * **Pascal Case**: i.e. `MySupportLibrary`
 * **Camel Case**: i.e. `mySupportLibrary`
