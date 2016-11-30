@@ -32,7 +32,7 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal %w(My Support Library), Reality::Naming.split_into_words('MySupportLibrary')
     assert_equal %w(my support library), Reality::Naming.split_into_words('my-support-library')
     assert_equal %w(my support library), Reality::Naming.split_into_words('my_support_library')
-    assert_equal %w(MY SUPPORT LIBRARY), Reality::Naming.split_into_words('MY_SUPPORT_LIBRARY')
+    assert_equal %w(my support library), Reality::Naming.split_into_words('MY_SUPPORT_LIBRARY')
   end
 
   def test_conversions
