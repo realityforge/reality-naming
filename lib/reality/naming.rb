@@ -104,18 +104,18 @@ module Reality
         pluralization_rules.clear
       end
 
-      private
-
-      def pluralization_rules
-        @pluralization_rules ||= []
-      end
-
-      def split_into_words(camel_cased_word)
-        word = camel_cased_word.to_s.dup
+      def split_into_words(word)
+        word = word.to_s.dup
         word.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
         word.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
         word.tr!('-', '_')
         word.split('_')
+      end
+
+      private
+
+      def pluralization_rules
+        @pluralization_rules ||= []
       end
 
       def last(s, limit = 1)
