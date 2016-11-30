@@ -39,8 +39,8 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.pascal_case('ThisIsCamelCased'), 'ThisIsCamelCased'
     assert_equal Reality::Naming.pascal_case('this_Is_Camel_Cased'), 'ThisIsCamelCased'
     assert_equal Reality::Naming.pascal_case('this_Is_camel_cased'), 'ThisIsCamelCased'
-    assert_equal Reality::Naming.pascal_case('EJB'), 'Ejb'
-    assert_equal Reality::Naming.pascal_case('EJBContainer'), 'EjbContainer'
+    assert_equal Reality::Naming.pascal_case('EJB'), 'EJB'
+    assert_equal Reality::Naming.pascal_case('EJBContainer'), 'EJBContainer'
 
     assert_equal Reality::Naming.pascal_case?('FindByID'), true
 
@@ -78,7 +78,8 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal %w(My Support Library), Reality::Naming.split_into_words('MySupportLibrary')
     assert_equal %w(my support library), Reality::Naming.split_into_words('my-support-library')
     assert_equal %w(my support library), Reality::Naming.split_into_words('my_support_library')
-    assert_equal %w(my support library), Reality::Naming.split_into_words('MY_SUPPORT_LIBRARY')
+    assert_equal %w(MY SUPPORT LIBRARY), Reality::Naming.split_into_words('MY_SUPPORT_LIBRARY')
+    assert_equal %w(my support library), Reality::Naming.split_into_words('MY_SUPPORT_LIBRARY', true)
 
     # ID is specially handled
     assert_equal %w(Find By ID), Reality::Naming.split_into_words('FindByID')

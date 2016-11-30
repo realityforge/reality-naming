@@ -21,7 +21,7 @@ module Reality
       end
 
       def camelize(input_word)
-        word_parts = split_into_words(input_word).collect { |part| part[0...1].upcase + part[1..-1] }
+        word_parts = split_into_words(input_word, true).collect { |part| part[0...1].upcase + part[1..-1] }
         return word_parts[0].downcase if (word_parts.size == 1 && word_parts[0] == word_parts[0].upcase)
         word = word_parts.join('')
         word[0...1].downcase + word[1..-1]
@@ -104,12 +104,13 @@ module Reality
         pluralization_rules.clear
       end
 
-      def split_into_words(word)
+      def split_into_words(word, downcase_all_upcased_words = false)
         word = word.to_s.dup
         word.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
         word.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
         word.tr!('-', '_')
-        word.split('_').collect{|w| w.upcase == w && w != 'ID' ? w.downcase : w }
+        result = word.split('_')
+        downcase_all_upcased_words ? result.collect{|w| w.upcase == w ? w.downcase : w } : result
       end
 
       private
