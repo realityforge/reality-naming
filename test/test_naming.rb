@@ -42,6 +42,8 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.pascal_case('EJB'), 'Ejb'
     assert_equal Reality::Naming.pascal_case('EJBContainer'), 'EjbContainer'
 
+    assert_equal Reality::Naming.pascal_case?('FindByID'), true
+
     assert_equal Reality::Naming.underscore('thisIsCamelCased'), 'this_is_camel_cased'
     assert_equal Reality::Naming.underscore('ThisIsCamelCased'), 'this_is_camel_cased'
     assert_equal Reality::Naming.underscore('this_Is_Camel_Cased'), 'this_is_camel_cased'
@@ -77,6 +79,9 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal %w(my support library), Reality::Naming.split_into_words('my-support-library')
     assert_equal %w(my support library), Reality::Naming.split_into_words('my_support_library')
     assert_equal %w(my support library), Reality::Naming.split_into_words('MY_SUPPORT_LIBRARY')
+
+    # ID is specially handled
+    assert_equal %w(Find By ID), Reality::Naming.split_into_words('FindByID')
   end
 
   def test_conversions
