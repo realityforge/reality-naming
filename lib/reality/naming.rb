@@ -108,6 +108,7 @@ module Reality
 
       def split_into_words(word)
         word = word.to_s.dup
+        word.gsub!(/^[_-]/, '')
         word.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
         word.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
         word.tr!('-', '_')

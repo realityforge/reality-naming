@@ -34,6 +34,7 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.camelize('this_Is_camel_cased'), 'thisIsCamelCased'
     assert_equal Reality::Naming.camelize('EJB'), 'ejb'
     assert_equal Reality::Naming.camelize('EJBContainer'), 'ejbContainer'
+    assert_equal Reality::Naming.camelize('_someField'), 'someField'
 
     assert_equal Reality::Naming.pascal_case('thisIsCamelCased'), 'ThisIsCamelCased'
     assert_equal Reality::Naming.pascal_case('ThisIsCamelCased'), 'ThisIsCamelCased'
@@ -41,6 +42,7 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.pascal_case('this_Is_camel_cased'), 'ThisIsCamelCased'
     assert_equal Reality::Naming.pascal_case('EJB'), 'EJB'
     assert_equal Reality::Naming.pascal_case('EJBContainer'), 'EJBContainer'
+    assert_equal Reality::Naming.pascal_case('_someField'), 'SomeField'
 
     assert_equal Reality::Naming.pascal_case?('FindByID'), true
 
@@ -50,6 +52,7 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.underscore('this_Is_camel_cased'), 'this_is_camel_cased'
     assert_equal Reality::Naming.underscore('EJB'), 'ejb'
     assert_equal Reality::Naming.underscore('EJBContainer'), 'ejb_container'
+    assert_equal Reality::Naming.underscore('_someField'), 'some_field'
 
     assert_equal Reality::Naming.uppercase_constantize('thisIsCamelCased'), 'THIS_IS_CAMEL_CASED'
     assert_equal Reality::Naming.uppercase_constantize('ThisIsCamelCased'), 'THIS_IS_CAMEL_CASED'
@@ -57,6 +60,7 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.uppercase_constantize('this_Is_camel_cased'), 'THIS_IS_CAMEL_CASED'
     assert_equal Reality::Naming.uppercase_constantize('EJB'), 'EJB'
     assert_equal Reality::Naming.uppercase_constantize('EJBContainer'), 'EJB_CONTAINER'
+    assert_equal Reality::Naming.uppercase_constantize('_someField'), 'SOME_FIELD'
 
     assert_equal Reality::Naming.xmlize('thisIsCamelCased'), 'this-is-camel-cased'
     assert_equal Reality::Naming.xmlize('ThisIsCamelCased'), 'this-is-camel-cased'
@@ -64,6 +68,7 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.xmlize('this_Is_camel_cased'), 'this-is-camel-cased'
     assert_equal Reality::Naming.xmlize('EJB'), 'ejb'
     assert_equal Reality::Naming.xmlize('EJBContainer'), 'ejb-container'
+    assert_equal Reality::Naming.xmlize('_someField'), 'some-field'
 
     assert_equal Reality::Naming.jsonize('thisIsCamelCased'), 'thisIsCamelCased'
     assert_equal Reality::Naming.jsonize('ThisIsCamelCased'), 'thisIsCamelCased'
@@ -71,6 +76,7 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.jsonize('this_Is_camel_cased'), 'thisIsCamelCased'
     assert_equal Reality::Naming.jsonize('EJB'), 'ejb'
     assert_equal Reality::Naming.jsonize('EJBContainer'), 'ejbContainer'
+    assert_equal Reality::Naming.jsonize('_someField'), 'someField'
   end
 
   def test_split_into_words
