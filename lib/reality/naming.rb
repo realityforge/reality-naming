@@ -17,7 +17,7 @@ module Reality
 
     class << self
       def camelize?(word)
-        camelize(word) == word
+        camelize(word) == word.to_s
       end
 
       def camelize(input_word)
@@ -30,7 +30,7 @@ module Reality
       end
 
       def pascal_case?(word)
-        pascal_case(word) == word
+        pascal_case(word) == word.to_s
       end
 
       def pascal_case(word)
@@ -40,7 +40,7 @@ module Reality
       end
 
       def underscore?(word)
-        underscore(word) == word
+        underscore(word) == word.to_s
       end
 
       def underscore(input_word)
@@ -48,7 +48,7 @@ module Reality
       end
 
       def xmlize?(word)
-        xmlize(word) == word
+        xmlize(word) == word.to_s
       end
 
       def xmlize(word)
@@ -56,7 +56,7 @@ module Reality
       end
 
       def jsonize?(word)
-        jsonize(word) == word
+        jsonize(word) == word.to_s
       end
 
       def jsonize(word)
@@ -64,7 +64,7 @@ module Reality
       end
 
       def uppercase_constantize?(word)
-        uppercase_constantize(word) == word
+        uppercase_constantize(word) == word.to_s
       end
 
       def uppercase_constantize(word)

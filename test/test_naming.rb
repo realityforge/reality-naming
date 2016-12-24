@@ -36,6 +36,10 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.camelize('EJBContainer'), 'ejbContainer'
     assert_equal Reality::Naming.camelize('_someField'), 'someField'
 
+    assert_equal Reality::Naming.camelize?('_someField'), false
+    assert_equal Reality::Naming.camelize?('someField'), true
+    assert_equal Reality::Naming.camelize?(:someField), true
+
     assert_equal Reality::Naming.pascal_case('thisIsCamelCased'), 'ThisIsCamelCased'
     assert_equal Reality::Naming.pascal_case('ThisIsCamelCased'), 'ThisIsCamelCased'
     assert_equal Reality::Naming.pascal_case('this_Is_Camel_Cased'), 'ThisIsCamelCased'
@@ -45,6 +49,8 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.pascal_case('_someField'), 'SomeField'
 
     assert_equal Reality::Naming.pascal_case?('FindByID'), true
+    assert_equal Reality::Naming.pascal_case?('findByID'), false
+    assert_equal Reality::Naming.pascal_case?(:FindByID), true
 
     assert_equal Reality::Naming.underscore('thisIsCamelCased'), 'this_is_camel_cased'
     assert_equal Reality::Naming.underscore('ThisIsCamelCased'), 'this_is_camel_cased'
@@ -54,6 +60,10 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.underscore('EJBContainer'), 'ejb_container'
     assert_equal Reality::Naming.underscore('_someField'), 'some_field'
 
+    assert_equal Reality::Naming.underscore?('some_field'), true
+    assert_equal Reality::Naming.underscore?('someField'), false
+    assert_equal Reality::Naming.underscore?(:some_field), true
+
     assert_equal Reality::Naming.uppercase_constantize('thisIsCamelCased'), 'THIS_IS_CAMEL_CASED'
     assert_equal Reality::Naming.uppercase_constantize('ThisIsCamelCased'), 'THIS_IS_CAMEL_CASED'
     assert_equal Reality::Naming.uppercase_constantize('this_Is_Camel_Cased'), 'THIS_IS_CAMEL_CASED'
@@ -61,6 +71,10 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.uppercase_constantize('EJB'), 'EJB'
     assert_equal Reality::Naming.uppercase_constantize('EJBContainer'), 'EJB_CONTAINER'
     assert_equal Reality::Naming.uppercase_constantize('_someField'), 'SOME_FIELD'
+
+    assert_equal Reality::Naming.uppercase_constantize?('EJB_CONTAINER'), true
+    assert_equal Reality::Naming.uppercase_constantize?('someField'), false
+    assert_equal Reality::Naming.uppercase_constantize?(:EJB_CONTAINER), true
 
     assert_equal Reality::Naming.xmlize('thisIsCamelCased'), 'this-is-camel-cased'
     assert_equal Reality::Naming.xmlize('ThisIsCamelCased'), 'this-is-camel-cased'
@@ -70,6 +84,10 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.xmlize('EJBContainer'), 'ejb-container'
     assert_equal Reality::Naming.xmlize('_someField'), 'some-field'
 
+    assert_equal Reality::Naming.xmlize?('ejb-container'), true
+    assert_equal Reality::Naming.xmlize?('ejbContainer'), false
+    assert_equal Reality::Naming.xmlize?(:'ejb-container'), true
+
     assert_equal Reality::Naming.jsonize('thisIsCamelCased'), 'thisIsCamelCased'
     assert_equal Reality::Naming.jsonize('ThisIsCamelCased'), 'thisIsCamelCased'
     assert_equal Reality::Naming.jsonize('this_Is_Camel_Cased'), 'thisIsCamelCased'
@@ -77,6 +95,10 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.jsonize('EJB'), 'ejb'
     assert_equal Reality::Naming.jsonize('EJBContainer'), 'ejbContainer'
     assert_equal Reality::Naming.jsonize('_someField'), 'someField'
+
+    assert_equal Reality::Naming.jsonize?('ejbContainer'), true
+    assert_equal Reality::Naming.jsonize?('this_Is_Camel_Cased'), false
+    assert_equal Reality::Naming.jsonize?(:ejbContainer), true
   end
 
   def test_split_into_words
@@ -108,5 +130,6 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal result, Reality::Naming.send(method_name, :'my_support_library'), "Checking conversion to #{result}"
     assert_equal result, Reality::Naming.send(method_name, :'my-support-library'), "Checking conversion to #{result}"
     assert_equal Reality::Naming.send(:"#{method_name}?", result), true
+    assert_equal Reality::Naming.send(:"#{method_name}?", result.to_sym), true
   end
 end
