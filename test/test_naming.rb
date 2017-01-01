@@ -27,6 +27,14 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal 'cats', Reality::Naming.pluralize('cat')
   end
 
+  def test_default_pluralization_rules
+    assert_equal 'children', Reality::Naming.pluralize('child')
+    Reality::Naming.clear_pluralization_rules
+    assert_equal 'childs', Reality::Naming.pluralize('child')
+    Reality::Naming.reset
+    assert_equal 'children', Reality::Naming.pluralize('child')
+  end
+
   def test_basics
     assert_equal Reality::Naming.camelize('thisIsCamelCased'), 'thisIsCamelCased'
     assert_equal Reality::Naming.camelize('ThisIsCamelCased'), 'thisIsCamelCased'

@@ -118,7 +118,13 @@ module Reality
       private
 
       def pluralization_rules
-        @pluralization_rules ||= []
+        @pluralization_rules ||= default_pluralization_rules
+      end
+
+      def default_pluralization_rules
+        rules = []
+        rules << Proc.new { |string| string == 'child' ? 'children' : nil }
+        rules
       end
 
       def last(s, limit = 1)
