@@ -124,6 +124,7 @@ module Reality
       def default_pluralization_rules
         rules = []
         rules << Proc.new { |string| string == 'child' ? 'children' : nil }
+        rules << Proc.new { |string| string == 'Child' ? 'Children' : nil }
         rules
       end
 

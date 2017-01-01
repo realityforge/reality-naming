@@ -29,10 +29,13 @@ class TestNaming < Reality::Naming::TestCase
 
   def test_default_pluralization_rules
     assert_equal 'children', Reality::Naming.pluralize('child')
+    assert_equal 'Children', Reality::Naming.pluralize('Child')
     Reality::Naming.clear_pluralization_rules
     assert_equal 'childs', Reality::Naming.pluralize('child')
+    assert_equal 'Childs', Reality::Naming.pluralize('Child')
     Reality::Naming.reset
     assert_equal 'children', Reality::Naming.pluralize('child')
+    assert_equal 'Children', Reality::Naming.pluralize('Child')
   end
 
   def test_basics
