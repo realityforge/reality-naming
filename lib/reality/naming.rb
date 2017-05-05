@@ -38,6 +38,16 @@ module Reality
         word_parts.join('')
       end
 
+      def humanize?(word)
+        humanize(word) == word.to_s
+      end
+
+      def humanize(word)
+        word_parts = split_into_words(word).collect { |part| part[0...1].upcase + part[1..-1] }
+        return word_parts[0] if (word_parts.size == 1 && word_parts[0] == word_parts[0].upcase)
+        word_parts.join(' ')
+      end
+
       def underscore?(word)
         underscore(word) == word.to_s
       end

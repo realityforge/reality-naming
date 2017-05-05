@@ -63,6 +63,18 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.pascal_case?('findByID'), false
     assert_equal Reality::Naming.pascal_case?(:FindByID), true
 
+    assert_equal Reality::Naming.humanize('thisIsCamelCased'), 'This Is Camel Cased'
+    assert_equal Reality::Naming.humanize('ThisIsCamelCased'), 'This Is Camel Cased'
+    assert_equal Reality::Naming.humanize('this_Is_Camel_Cased'), 'This Is Camel Cased'
+    assert_equal Reality::Naming.humanize('this_Is_camel_cased'), 'This Is Camel Cased'
+    assert_equal Reality::Naming.humanize('EJB'), 'EJB'
+    assert_equal Reality::Naming.humanize('EJBContainer'), 'EJB Container'
+    assert_equal Reality::Naming.humanize('_someField'), 'Some Field'
+
+    assert_equal Reality::Naming.humanize?('Find By ID'), true
+    assert_equal Reality::Naming.humanize?('find By ID'), false
+    assert_equal Reality::Naming.humanize?(:'Find By ID'), true
+
     assert_equal Reality::Naming.underscore('thisIsCamelCased'), 'this_is_camel_cased'
     assert_equal Reality::Naming.underscore('ThisIsCamelCased'), 'this_is_camel_cased'
     assert_equal Reality::Naming.underscore('this_Is_Camel_Cased'), 'this_is_camel_cased'
