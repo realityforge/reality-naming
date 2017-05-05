@@ -14,7 +14,6 @@
 
 module Reality
   module Naming
-
     class << self
       def camelize?(word)
         camelize(word) == word.to_s
