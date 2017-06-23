@@ -56,12 +56,20 @@ module Reality
         split_into_words(input_word).join('_').downcase
       end
 
+      def kebabcase?(word)
+        kebabcase(word) == word.to_s
+      end
+
+      def kebabcase(word)
+        underscore(word).tr('_', '-')
+      end
+
       def xmlize?(word)
         xmlize(word) == word.to_s
       end
 
       def xmlize(word)
-        underscore(word).tr('_', '-')
+        kebabcase(word)
       end
 
       def jsonize?(word)

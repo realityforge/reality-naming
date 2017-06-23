@@ -99,6 +99,18 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal Reality::Naming.uppercase_constantize?('someField'), false
     assert_equal Reality::Naming.uppercase_constantize?(:EJB_CONTAINER), true
 
+    assert_equal Reality::Naming.kebabcase('thisIsCamelCased'), 'this-is-camel-cased'
+    assert_equal Reality::Naming.kebabcase('ThisIsCamelCased'), 'this-is-camel-cased'
+    assert_equal Reality::Naming.kebabcase('this_Is_Camel_Cased'), 'this-is-camel-cased'
+    assert_equal Reality::Naming.kebabcase('this_Is_camel_cased'), 'this-is-camel-cased'
+    assert_equal Reality::Naming.kebabcase('EJB'), 'ejb'
+    assert_equal Reality::Naming.kebabcase('EJBContainer'), 'ejb-container'
+    assert_equal Reality::Naming.kebabcase('_someField'), 'some-field'
+
+    assert_equal Reality::Naming.kebabcase?('ejb-container'), true
+    assert_equal Reality::Naming.kebabcase?('ejbContainer'), false
+    assert_equal Reality::Naming.kebabcase?(:'ejb-container'), true
+
     assert_equal Reality::Naming.xmlize('thisIsCamelCased'), 'this-is-camel-cased'
     assert_equal Reality::Naming.xmlize('ThisIsCamelCased'), 'this-is-camel-cased'
     assert_equal Reality::Naming.xmlize('this_Is_Camel_Cased'), 'this-is-camel-cased'
