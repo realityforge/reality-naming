@@ -108,8 +108,6 @@ module Reality
             plural = "#{singular[0, length - 2]}ves"
           elsif %w(is).include?(last_2ch)
             plural = "#{singular[0, length - 2]}es"
-          elsif %w(on).include?(last_2ch)
-            plural = "#{singular[0, length - 2]}a"
           elsif %w(ss ch sh).include?(last_2ch) || %w(s x z).include?(last_ch)
             plural = "#{singular}es"
           elsif %w(o).include?(last_ch)
@@ -168,6 +166,8 @@ module Reality
         exception_map['gas'] = 'gasses'
         exception_map['cactus'] = 'cacti'
         exception_map['focus'] = 'foci'
+        exception_map['phenomenon'] = 'phenomena'
+        exception_map['criterion'] = 'criteria'
 
         exception_map.dup.each_pair do |k, v|
           exception_map[k[0...1].upcase + k[1..-1]] = v[0...1].upcase + v[1..-1]
