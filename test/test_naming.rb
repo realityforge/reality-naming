@@ -6,24 +6,30 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal 'cats', Reality::Naming.pluralize(:cat)
     assert_equal 'poppies', Reality::Naming.pluralize('poppy')
     assert_equal 'says', Reality::Naming.pluralize('say')
-    assert_equal 'foos', Reality::Naming.pluralize('foo')
+    assert_equal 'fooes', Reality::Naming.pluralize('foo')
+    assert_equal 'dispatches', Reality::Naming.pluralize('dispatch')
+    assert_equal 'bushes', Reality::Naming.pluralize('bush')
+    assert_equal 'losses', Reality::Naming.pluralize('loss')
+    assert_equal 'boxes', Reality::Naming.pluralize('box')
+    assert_equal 'blitzes', Reality::Naming.pluralize('blitz')
+    assert_equal 'trusses', Reality::Naming.pluralize('truss')
+    assert_equal 'buses', Reality::Naming.pluralize('bus')
+    assert_equal 'marshes', Reality::Naming.pluralize('marsh')
+    assert_equal 'potatoes', Reality::Naming.pluralize('potato')
+    assert_equal 'tomatoes', Reality::Naming.pluralize('tomato')
+    assert_equal 'analyses', Reality::Naming.pluralize('analysis')
+    assert_equal 'ellipses', Reality::Naming.pluralize('ellipsis')
+    assert_equal 'phenomena', Reality::Naming.pluralize('phenomenon')
+    assert_equal 'criteria', Reality::Naming.pluralize('criterion')
   end
 
   def test_custom_pluralization_rules
-    assert_equal 'heros', Reality::Naming.pluralize('hero')
-    assert_equal 'cats', Reality::Naming.pluralize('cat')
-    Reality::Naming.add_pluralization_rule do |string|
-      string == 'hero' ? 'heroes' : nil
-    end
-    assert_equal 'heroes', Reality::Naming.pluralize('hero')
     assert_equal 'cats', Reality::Naming.pluralize('cat')
     Reality::Naming.add_pluralization_rule do |string|
       string == 'cat' ? 'catz' : nil
     end
-    assert_equal 'heroes', Reality::Naming.pluralize('hero')
     assert_equal 'catz', Reality::Naming.pluralize('cat')
     Reality::Naming.clear_pluralization_rules
-    assert_equal 'heros', Reality::Naming.pluralize('hero')
     assert_equal 'cats', Reality::Naming.pluralize('cat')
   end
 

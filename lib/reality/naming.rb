@@ -106,10 +106,14 @@ module Reality
             plural = "#{singular[0, length - 1]}ves" unless singular =~ /[aeiou][aeiou]f$/
           elsif last_2ch == 'fe'
             plural = "#{singular[0, length - 2]}ves"
-          elsif %w(ch sh).include?(last_2ch)
+          elsif %w(is).include?(last_2ch)
             plural = "#{singular[0, length - 2]}es"
-          elsif %w(s x z).include?(last_ch)
-            plural = "#{singular[0, length - 1]}es"
+          elsif %w(on).include?(last_2ch)
+            plural = "#{singular[0, length - 2]}a"
+          elsif %w(ss ch sh).include?(last_2ch) || %w(s x z).include?(last_ch)
+            plural = "#{singular}es"
+          elsif %w(o).include?(last_ch)
+            plural = "#{singular}es"
           end
         end
         plural || "#{singular}s"
@@ -140,8 +144,36 @@ module Reality
 
       def default_pluralization_rules
         rules = []
-        rules << Proc.new { |string| string == 'child' ? 'children' : nil }
-        rules << Proc.new { |string| string == 'Child' ? 'Children' : nil }
+        exception_map = {}
+        %w(sheep series species deer fish).each do |w|
+          w2 = w[0...1].upcase + w[1..-1]
+          exception_map[w] = w
+          exception_map[w2] = w2
+        end
+        exception_map['child'] = 'children'
+        exception_map['goose'] = 'geese'
+        exception_map['man'] = 'men'
+        exception_map['woman'] = 'women'
+        exception_map['tooth'] = 'teeth'
+        exception_map['mouse'] = 'mice'
+        exception_map['foot'] = 'feet'
+        exception_map['person'] = 'people'
+        exception_map['photo'] = 'photos'
+        exception_map['piano'] = 'pianos'
+        exception_map['halo'] = 'halos'
+        exception_map['belief'] = 'beliefs'
+        exception_map['chef'] = 'chefs'
+        exception_map['chief'] = 'chiefs'
+        exception_map['fez'] = 'fezzes'
+        exception_map['gas'] = 'gasses'
+        exception_map['cactus'] = 'cacti'
+        exception_map['focus'] = 'foci'
+
+        exception_map.dup.each_pair do |k, v|
+          exception_map[k[0...1].upcase + k[1..-1]] = v[0...1].upcase + v[1..-1]
+        end
+
+        rules << Proc.new { |string| exception_map[string] }
         rules
       end
 
