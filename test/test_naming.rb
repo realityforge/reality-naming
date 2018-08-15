@@ -45,6 +45,14 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal 'cattles', Reality::Naming.pluralize('cat')
   end
 
+  def test_custom_pluralization_overlap_with_defaults
+    assert_equal 'IsAsGoodAses', Reality::Naming.pluralize('IsAsGoodAs')
+    Reality::Naming.add_pluralization_rule do |string|
+      string.to_s == 'IsAsGoodAs' ? 'IsAsGoodAsSet' : nil
+    end
+    assert_equal 'IsAsGoodAsSet', Reality::Naming.pluralize('IsAsGoodAs')
+  end
+
   def test_default_pluralization_rules
     assert_equal 'children', Reality::Naming.pluralize('child')
     assert_equal 'Children', Reality::Naming.pluralize('Child')
