@@ -33,6 +33,18 @@ class TestNaming < Reality::Naming::TestCase
     assert_equal 'cats', Reality::Naming.pluralize('cat')
   end
 
+  def test_custom_pluralization_rules_ordering
+    assert_equal 'cats', Reality::Naming.pluralize('cat')
+    Reality::Naming.add_pluralization_rule do |string|
+      string == 'cat' ? 'catz' : nil
+    end
+    assert_equal 'catz', Reality::Naming.pluralize('cat')
+    Reality::Naming.add_pluralization_rule do |string|
+      string == 'cat' ? 'cattles' : nil
+    end
+    assert_equal 'cattles', Reality::Naming.pluralize('cat')
+  end
+
   def test_default_pluralization_rules
     assert_equal 'children', Reality::Naming.pluralize('child')
     assert_equal 'Children', Reality::Naming.pluralize('Child')

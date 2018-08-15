@@ -118,7 +118,7 @@ module Reality
       end
 
       def add_pluralization_rule(&block)
-        pluralization_rules << block
+        pluralization_rules.unshift(block)
       end
 
       def clear_pluralization_rules
