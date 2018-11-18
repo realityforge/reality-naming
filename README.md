@@ -1,6 +1,6 @@
 # reality-naming
 
-[![Build Status](https://secure.travis-ci.org/realityforge/reality-naming.png?branch=master)](http://travis-ci.org/realityforge/reality-naming)
+[![Build Status](https://secure.travis-ci.org/realityforge/reality-naming.svg?branch=master)](http://travis-ci.org/realityforge/reality-naming)
 
 `reality-naming` is a simple library to convert names between different naming conventions.
 Conventions supported include:
