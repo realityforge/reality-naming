@@ -4,4 +4,6 @@ rvm:
 git:
   depth: 10
 before_install:
+- rvm install ruby-2.7.2
+- rvm use 2.7.2
   - gem update bundler
